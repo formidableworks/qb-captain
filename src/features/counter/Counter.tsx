@@ -4,12 +4,12 @@ import {
   decrement,
   increment,
   incrementByAmount,
-  incrementAsync,
-  selectCount,
 } from './counterSlice';
+import { selectCount } from "./counterSelectors";
+import { incrementAsync } from "./counterThunks";
 import styles from './Counter.module.css';
 
-export function Counter() {
+export function Counter(): JSX.Element {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
@@ -21,6 +21,7 @@ export function Counter() {
           className={styles.button}
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
+          type="button"
         >
           +
         </button>
@@ -29,6 +30,7 @@ export function Counter() {
           className={styles.button}
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
+          type="button"
         >
           -
         </button>
@@ -45,12 +47,14 @@ export function Counter() {
           onClick={() =>
             dispatch(incrementByAmount(Number(incrementAmount) || 0))
           }
+          type="button"
         >
           Add Amount
         </button>
         <button
           className={styles.asyncButton}
           onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
+          type="button"
         >
           Add Async
         </button>
