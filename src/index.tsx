@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
 import { App } from './App';
 import { store } from './app/store';
 import * as serviceWorker from './serviceWorker';
@@ -8,7 +9,9 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HashRouter>
+        <App />
+      </HashRouter>
     </Provider>
   </React.StrictMode>,
   document.querySelector('#root')

@@ -1,12 +1,6 @@
 import React from 'react';
-import { LoginForm } from './features/authentication/LoginForm';
-import { MainDataControl } from './features/sync/MainDataControl';
+import { PageRouter } from './features/PageRouter';
 
 export function App(): JSX.Element {
-  return (
-    <div>
-      <LoginForm />
-      <MainDataControl />
-    </div>
-  );
+  return <PageRouter />;
 }
