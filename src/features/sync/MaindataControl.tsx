@@ -1,14 +1,17 @@
+import { CircularProgress } from '@material-ui/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsMaindataPending } from './syncSelectors';
 import { maindataThunk } from './syncThunks';
 
+// TODO: move to props.
+// TODO: add material-ui components.
 const refreshTime = 5000;
 const segments = 8;
 export function MaindataControl(): JSX.Element {
   const dispatch = useDispatch();
   const isMaindataPending = useSelector(selectIsMaindataPending);
-  const [progress, setProgress] = React.useState(100 / segments);
+  const [progress, setProgress] = React.useState((100 / segments) * (segments - 1));
 
   const triggerThunk = (): void => {
     if (isMaindataPending) {
@@ -40,7 +43,7 @@ export function MaindataControl(): JSX.Element {
       <button type="button" onClick={triggerThunk}>
         getMaindata
       </button>
-      {progress}
+      <CircularProgress variant="static" value={progress} />
     </div>
   );
 }
