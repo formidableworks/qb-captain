@@ -30,6 +30,7 @@ export const authReducer = createReducer(initialState, (builder) => {
         action.error.message === 'Request failed with status code 403',
       (draftState) => {
         draftState.isAuthorised = false;
+        // TODO: implement entire redux state reset.
       }
     );
 });
