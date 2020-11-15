@@ -1,13 +1,13 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { LoginForm } from './authentication/LoginForm';
-import { MainDataControl } from './sync/MainDataControl';
+import { MaindataControl } from './sync/MaindataControl';
 
 export const PageRouter = (): JSX.Element => {
   return (
     <Switch>
       <Route path="/transfers">
-        <MainDataControl />
+        <MaindataControl />
       </Route>
 
       <Route path="/search">

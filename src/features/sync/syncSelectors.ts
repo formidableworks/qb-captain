@@ -1,3 +1,3 @@
 import { RootState } from '../../app/store';
 
-export const selectIsAuthd = (state: RootState): boolean => state.auth.isAuthorised;
+export const selectIsMaindataPending = (state: RootState): boolean => state.sync.isMaindataPending;
