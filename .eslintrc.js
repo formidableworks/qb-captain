@@ -62,7 +62,10 @@ module.exports = {
     ],
 
     // no param reassign is good but it interferes with immerjs's (redux toolkit) conventions. so whitelist var names start with 'draft'.
-    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsForRegex: ['^draft'] }],
+    'no-param-reassign': [
+      'error',
+      { props: true, ignorePropertyModificationsForRegex: ['^draft'] },
+    ],
 
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': 'off',

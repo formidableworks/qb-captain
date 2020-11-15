@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "TransferInfo.json",
+  "title": "TransferInfo",
+  "description": "Qbittorrent webapi Transfer Info",
+  "type": "object",
+  "properties": {
+    "dl_info_speed": {
+      "type": "number",
+      "description": "Data downloaded this session (bytes)"
+    },
+    "connection_status": {
+      "type": "string",
+      "enum": ["connected", "firewalled", "disconnected"],
+      "description": "Whether the response contains all the data or partial data"
+    }
+  },
+  "required": ["dl_info_speed", "connection_status"]
+}

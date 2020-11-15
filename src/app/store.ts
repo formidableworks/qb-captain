@@ -1,11 +1,18 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { counterSlice } from '../features/counter/counterSlice';
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { authReducer } from '../features/authentication/authReducer';
+import { syncReducer } from '../features/sync/syncReducer';
 
 export const store = configureStore({
   reducer: {
-    counter: counterSlice.reducer,
+    auth: authReducer,
+    sync: syncReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "LoginResponse.json",
+  "title": "LoginResponse",
+  "description": "Qbittorrent webapi api/v2/auth/login response.",
+  "type": "string",
+  "enum": ["Ok.", "Fails."]
+}
