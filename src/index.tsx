@@ -1,3 +1,5 @@
+import CssBaseline from '@material-ui/core/CssBaseline';
+import 'fontsource-roboto';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -10,6 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <HashRouter>
+        <CssBaseline />
         <App />
       </HashRouter>
     </Provider>
