@@ -13,10 +13,10 @@
       "type": "boolean",
       "description": "Whether the response contains all the data or partial data"
     },
-    "server_state": { "$ref": "TransferInfoResponse.json" },
+    "server_state": { "$ref": "TransferInfo.json" },
     "torrents": {
       "type": "object",
-      "description": "Dictionary of torrent-hash against torrent-attributes",
+      "description": "Dictionary of torrenthashes: torrentInfo",
       "additionalProperties": { "$ref": "TorrentInfo.json" }
     }
   },
