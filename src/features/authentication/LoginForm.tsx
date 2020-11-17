@@ -1,11 +1,37 @@
+import { Button, TextField } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAuthd } from './authSelectors';
-import { loginThunk, logoutThunk } from './authThunks';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from './authThunks';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      flexGrow: 1,
+    },
+    superIcon: {
+      width: '5em',
+      height: '5em',
+      marginBottom: theme.spacing(2),
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    bottomMargin: {
+      marginBottom: theme.spacing(2),
+    },
+  })
+);
 
 export function LoginForm(): JSX.Element {
   const dispatch = useDispatch();
-  const isAuthd = useSelector(selectIsAuthd);
+  const classes = useStyles();
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -15,21 +41,29 @@ export function LoginForm(): JSX.Element {
     dispatch(loginThunk({ username, password }));
   };
 
-  const handleLogoutButtonClick = (): void => {
-    dispatch(logoutThunk());
-  };
-
   return (
-    <>
-      {isAuthd ? <span>authd</span> : <span>not authd</span>}
-      <form onSubmit={handleFormSubmit}>
-        <input name="usr" />
-        <input name="pwd" type="password" />
-        <button type="submit">Login</button>
+    <div className={classes.root}>
+      <AccountCircleIcon className={classes.superIcon} color="disabled" />
+      <form onSubmit={handleFormSubmit} className={classes.form}>
+        <TextField
+          className={classes.bottomMargin}
+          variant="outlined"
+          label="Username"
+          name="usr"
+          size="small"
+        />
+        <TextField
+          className={classes.bottomMargin}
+          variant="outlined"
+          label="Password"
+          name="pwd"
+          type="password"
+          size="small"
+        />
+        <Button type="submit" variant="outlined" color="primary">
+          Login
+        </Button>
       </form>
-      <button type="button" onClick={handleLogoutButtonClick}>
-        Logout
-      </button>
-    </>
+    </div>
   );
 }
