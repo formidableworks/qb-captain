@@ -1,9 +1,8 @@
-import qs from 'qs';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import { selectIsAuthd } from './authentication/authSelectors';
-import { LoginForm } from './authentication/LoginForm';
+import { LoginDialog } from './authentication/LoginDialog';
 import { MaindataControl } from './sync/MaindataControl';
 
 export const PageRouter = (): JSX.Element => {
@@ -14,16 +13,11 @@ export const PageRouter = (): JSX.Element => {
   React.useEffect(() => {
     if (!isAuthd && location.pathname !== '/login') {
       console.warn('user is unauthorised, redirecting to login page.');
-      history.push(`/login?${qs.stringify({ referrer: location.pathname })}`);
+      history.push({ pathname: '/login' });
     }
     // if user isAuthd and on login page redirect to root/ referrer page (when stored in search params.)
     if (isAuthd && location.pathname === '/login') {
-      const searchParams = qs.parse(location.search.replace('?', ''));
-      if (searchParams.referrer) {
-        history.push(searchParams.referrer as string);
-      } else {
-        history.push('/');
-      }
+      history.goBack();
     }
   }, [isAuthd, location]);
 
@@ -46,7 +40,7 @@ export const PageRouter = (): JSX.Element => {
       </Route>
 
       <Route path="/login">
-        <LoginForm />
+        <LoginDialog />
       </Route>
 
       <Route exact path="/">
