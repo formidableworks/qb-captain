@@ -6,6 +6,30 @@
  */
 
 /**
+ * Torrent state
+ */
+export type TorrentInfoState =
+  | "error"
+  | "missingFiles"
+  | "uploading"
+  | "pausedUP"
+  | "queuedUP"
+  | "stalledUP"
+  | "checkingUP"
+  | "forcedUP"
+  | "allocating"
+  | "downloading"
+  | "metaDL"
+  | "pausedDL"
+  | "queuedDL"
+  | "stalledDL"
+  | "checkingDL"
+  | "forceDL"
+  | "checkingResumeData"
+  | "moving"
+  | "unknown";
+
+/**
  * Qbittorrent webapi /api/v2/sync/maindata response.
  */
 export interface MaindataResponse {
@@ -17,19 +41,19 @@ export interface MaindataResponse {
    * Whether the response contains all the data or partial data
    */
   full_update: boolean;
-  server_state?: TransferInfoResponse;
+  server_state?: TransferInfo;
   /**
-   * Dictionary of torrent-hash against torrent-attributes
+   * Dictionary of torrenthashes: torrentInfo
    */
-  torrents?: {
+  torrents: {
     [k: string]: TorrentInfo;
   };
   [k: string]: unknown;
 }
 /**
- * Qbittorrent webapi /api/v2/transfer/info response.
+ * Qbittorrent webapi Transfer Info
  */
-export interface TransferInfoResponse {
+export interface TransferInfo {
   /**
    * Data downloaded this session (bytes)
    */
@@ -37,13 +61,17 @@ export interface TransferInfoResponse {
   /**
    * Whether the response contains all the data or partial data
    */
-  connection_status: 'connected' | 'firewalled' | 'disconnected';
+  connection_status: "connected" | "firewalled" | "disconnected";
   [k: string]: unknown;
 }
 /**
  * Qbittorrent webapi Torrent Info
  */
 export interface TorrentInfo {
+  /**
+   * Torrent hash
+   */
+  hash?: string;
   /**
    * Torrent name
    */
@@ -52,5 +80,34 @@ export interface TorrentInfo {
    * Torrent progress (percentage/100)
    */
   progress: number;
+  /**
+   * Torrent download speed (bytes/s)
+   */
+  dlspeed: number;
+  /**
+   * Torrent upload speed (bytes/s)
+   */
+  upspeed: number;
+  /**
+   * Total size (bytes) of files selected for download
+   */
+  size: number;
+  /**
+   * Number of seeds connected to
+   */
+  num_seeds: number;
+  /**
+   * Number of leechers connected to
+   */
+  num_leechs: number;
+  /**
+   * Torrent ETA (seconds)
+   */
+  eta: number;
+  /**
+   * Torrent priority. Returns -1 if queuing is disabled or torrent is in seed mode
+   */
+  priority: number;
+  state: TorrentInfoState;
   [k: string]: unknown;
 }

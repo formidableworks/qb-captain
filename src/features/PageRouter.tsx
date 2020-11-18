@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import { selectIsAuthd } from './authentication/authSelectors';
 import { LoginDialog } from './authentication/LoginDialog';
-import { MaindataControl } from './sync/MaindataControl';
+import { TransfersRoot } from './sync/TransfersRoot';
 
 export const PageRouter = (): JSX.Element => {
   const isAuthd = useSelector(selectIsAuthd);
@@ -24,7 +24,7 @@ export const PageRouter = (): JSX.Element => {
   return (
     <Switch>
       <Route path="/transfers">
-        <MaindataControl />
+        <TransfersRoot />
       </Route>
 
       <Route path="/search">

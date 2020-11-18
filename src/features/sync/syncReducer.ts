@@ -12,6 +12,11 @@ const initialState: SyncState = {
   maindata: {
     rid: 0,
     full_update: true,
+    torrents: {},
+    server_state: {
+      connection_status: 'disconnected',
+      dl_info_speed: 0,
+    },
   },
 };
 

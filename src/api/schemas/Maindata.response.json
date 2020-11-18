@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "MaindataResponse.json",
+  "$id": "Maindata.response.json",
   "title": "MaindataResponse",
   "description": "Qbittorrent webapi /api/v2/sync/maindata response.",
   "type": "object",
@@ -20,5 +20,5 @@
       "additionalProperties": { "$ref": "TorrentInfo.json" }
     }
   },
-  "required": ["rid", "full_update"]
+  "required": ["rid", "full_update", "torrents"]
 }

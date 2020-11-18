@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
+      display: 'flex',
+      flexDirection: 'column',
     },
   })
 );

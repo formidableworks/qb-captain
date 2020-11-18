@@ -3,9 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsMaindataPending } from './syncSelectors';
 import { maindataThunk } from './syncThunks';
-
 // TODO: move to props.
-// TODO: add material-ui components.
 const refreshTime = 5000;
 const segments = 8;
 export function MaindataControl(): JSX.Element {

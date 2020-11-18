@@ -5,6 +5,10 @@
   "description": "Qbittorrent webapi Torrent Info",
   "type": "object",
   "properties": {
+    "hash": {
+      "type": "string",
+      "description": "Torrent hash"
+    },
     "name": {
       "type": "string",
       "description": "Torrent name"
@@ -12,7 +16,47 @@
     "progress": {
       "type": "number",
       "description": "Torrent progress (percentage/100)"
-    }
+    },
+    "dlspeed": {
+      "type": "number",
+      "description": "Torrent download speed (bytes/s)"
+    },
+    "upspeed": {
+      "type": "number",
+      "description": "Torrent upload speed (bytes/s)"
+    },
+    "size": {
+      "type": "number",
+      "description": "Total size (bytes) of files selected for download"
+    },
+    "num_seeds": {
+      "type": "number",
+      "description": "Number of seeds connected to"
+    },
+    "num_leechs": {
+      "type": "number",
+      "description": "Number of leechers connected to"
+    },
+    "eta": {
+      "type": "number",
+      "description": "Torrent ETA (seconds)"
+    },
+    "priority": {
+      "type": "number",
+      "description": "Torrent priority. Returns -1 if queuing is disabled or torrent is in seed mode"
+    },
+    "state": { "$ref": "TorrentInfoState.json" }
   },
-  "required": ["name", "progress"]
+  "required": [
+    "name",
+    "progress",
+    "dlspeed",
+    "upspeed",
+    "size",
+    "num_seeds",
+    "num_leechs",
+    "eta",
+    "priority",
+    "state"
+  ]
 }

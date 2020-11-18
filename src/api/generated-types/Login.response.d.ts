@@ -8,4 +8,4 @@
 /**
  * Qbittorrent webapi api/v2/auth/login response.
  */
-export type LoginResponse = 'Ok.' | 'Fails.';
+export type LoginResponse = "Ok." | "Fails.";
