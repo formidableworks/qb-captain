@@ -170,7 +170,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     primaryChipAugmentation: {
       backgroundColor: (chipData: StateChipValues) => {
-        return chipData.muiPalette.main;
+        return theme.palette.type === 'light' ? chipData.muiPalette.main : chipData.muiPalette.dark;
       },
       color: (chipData: StateChipValues) => {
         return chipData.muiPalette.contrastText;

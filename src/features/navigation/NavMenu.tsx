@@ -1,15 +1,20 @@
 import { IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import NightsStayIcon from '@material-ui/icons/NightsStay';
 import SettingsIcon from '@material-ui/icons/Settings';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { logoutThunk } from '../authentication/authThunks';
+import { toggleThemeType } from '../theme/themeActions';
+import { selectThemeType } from '../theme/themeSelectors';
 
 export function NavMenu(): JSX.Element {
   const history = useHistory();
   const dispatch = useDispatch();
+  const themeType = useSelector(selectThemeType);
   const [anchorEl, setAnchorEl] = React.useState<undefined | HTMLElement>(undefined);
   const open = Boolean(anchorEl);
 
@@ -30,8 +35,11 @@ export function NavMenu(): JSX.Element {
       case 'logout':
         dispatch(logoutThunk());
         break;
-      default:
+      case 'toggleThemeType':
+        dispatch(toggleThemeType());
         break;
+      default:
+        throw new Error(`NavMenu: unexpected choice ${item}`);
     }
   };
 
@@ -57,6 +65,12 @@ export function NavMenu(): JSX.Element {
             <MeetingRoomIcon fontSize="small" />
           </ListItemIcon>
           Logout
+        </MenuItem>
+        <MenuItem onClick={() => handleItemClick('toggleThemeType')}>
+          <ListItemIcon>
+            {themeType === 'light' ? <NightsStayIcon /> : <WbSunnyIcon />}
+          </ListItemIcon>
+          {themeType === 'light' ? 'Dark' : 'Light'} mode
         </MenuItem>
       </Menu>
     </div>

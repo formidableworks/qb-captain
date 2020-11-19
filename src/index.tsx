@@ -6,14 +6,17 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { App } from './App';
 import { store } from './app/store';
+import { QbtCaptThemer } from './features/theme/QbCaptThemer';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <HashRouter>
-        <CssBaseline />
-        <App />
+        <QbtCaptThemer>
+          <CssBaseline />
+          <App />
+        </QbtCaptThemer>
       </HashRouter>
     </Provider>
   </React.StrictMode>,
