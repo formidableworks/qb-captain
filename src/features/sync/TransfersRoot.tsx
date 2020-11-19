@@ -1,6 +1,5 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
-import { MaindataControl } from './MaindataControl';
 import { TorrentList } from './TorrentList';
 import { TransfersToolbar } from './TransfersToolbar';
 
@@ -20,7 +19,6 @@ export const TransfersRoot = (): JSX.Element => {
     <div className={classes.TransfersRootRoot}>
       <TransfersToolbar />
       <TorrentList />
-      <MaindataControl />
     </div>
   );
 };
