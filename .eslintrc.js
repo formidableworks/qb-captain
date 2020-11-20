@@ -75,6 +75,6 @@ module.exports = {
     'unicorn/no-useless-undefined': 'off',
 
     // allow useful console logs.
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
   },
 };
