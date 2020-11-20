@@ -93,7 +93,7 @@ const getChipData = (torrentState: TorrentInfoState, theme: Theme): StateChipVal
         displayText: 'Missing files',
         tooltip: 'Torrent data files is missing.',
         icon: <DescriptionIcon />,
-        muiPalette: theme.palette.warning,
+        muiPalette: theme.palette.error,
       };
     case 'moving':
       return {
@@ -135,7 +135,7 @@ const getChipData = (torrentState: TorrentInfoState, theme: Theme): StateChipVal
         displayText: 'Stalled (incomplete)',
         tooltip: 'Torrent is being downloaded, but no connections were made.',
         icon: <AcUnitIcon />,
-        muiPalette: theme.palette.info,
+        muiPalette: theme.palette.warning,
       };
     case 'stalledUP':
       return {
