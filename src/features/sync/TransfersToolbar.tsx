@@ -1,9 +1,10 @@
-import { Button, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SortIcon from '@material-ui/icons/Sort';
 import React from 'react';
 import { MaindataControl } from './MaindataControl';
+import { QuickFilterTextField } from './QuickFilterTextField';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,13 +30,7 @@ export const TransfersToolbar = (): JSX.Element => {
   const classes = useStyles();
   return (
     <div className={classes.TransfersToolbarRoot}>
-      <TextField
-        className={classes.marginRight}
-        InputProps={{ classes: { root: classes.inputRoot } }}
-        variant="outlined"
-        placeholder="Quick filter"
-        size="small"
-      />
+      <QuickFilterTextField />
       <div className={classes.spacer} />
       <Button className={classes.marginRight} size="small" startIcon={<FilterListIcon />}>
         Filter

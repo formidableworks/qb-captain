@@ -1,13 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { MaindataResponse } from '../../api/generated-types/Maindata.response';
+import { setQuickFilter } from './syncActions';
 import { maindataThunk } from './syncThunks';
 
 interface SyncState {
+  quickFilter: string;
   isMaindataPending: boolean;
   maindata: MaindataResponse;
 }
 
 const initialState: SyncState = {
+  quickFilter: '',
   isMaindataPending: false,
   maindata: {
     rid: 0,
@@ -36,5 +39,8 @@ export const syncReducer = createReducer(initialState, (builder) => {
     })
     .addCase(maindataThunk.rejected, (draftState) => {
       draftState.isMaindataPending = false;
+    })
+    .addCase(setQuickFilter, (draftState, action) => {
+      draftState.quickFilter = action.payload;
     });
 });

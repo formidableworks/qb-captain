@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { FixedSizeList } from 'react-window';
-import { selectMaindataTorrents } from './syncSelectors';
+import { selectFilteredTorrents } from './syncSelectors';
 import { TorrentItem } from './TorrentItem';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -16,12 +16,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const TorrentList = (): JSX.Element => {
   const classes = useStyles();
-  const torrents = useSelector(selectMaindataTorrents);
+  const torrents = useSelector(selectFilteredTorrents);
   return (
     <div className={classes.TorrentListRoot}>
       <AutoSizer>
         {({ height, width }: Size) => (
-          <FixedSizeList height={height} width={width} itemCount={torrents.length} itemSize={35}>
+          <FixedSizeList
+            itemData={torrents}
+            height={height}
+            width={width}
+            itemCount={torrents.length}
+            itemSize={35}
+          >
             {TorrentItem}
           </FixedSizeList>
         )}
