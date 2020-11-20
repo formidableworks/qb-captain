@@ -2,7 +2,7 @@ import { AppBar, Dialog, Toolbar, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,13 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export function SettingsFullScreenDialog(): JSX.Element {
   const classes = useStyles();
-  const history = useHistory();
   const location = useLocation();
   const open = location.pathname === '/settings';
-
-  const handleClose = (): void => {
-    history.goBack();
-  };
 
   return (
     <Dialog fullScreen hideBackdrop open={open}>

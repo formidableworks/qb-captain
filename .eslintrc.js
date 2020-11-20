@@ -73,5 +73,8 @@ module.exports = {
 
     // react useState requires param.
     'unicorn/no-useless-undefined': 'off',
+
+    // allow useful console logs.
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 };

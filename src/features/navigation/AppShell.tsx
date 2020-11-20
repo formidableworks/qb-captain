@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { SettingsFullScreenDialog } from '../settings/SettingsFullScreenDialog';
 import { QbCaptAppBar } from './QbCaptAppBar';
@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',

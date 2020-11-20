@@ -1,9 +1,9 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { TorrentList } from './TorrentList';
 import { TransfersToolbar } from './TransfersToolbar';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     TransfersRootRoot: {
       display: 'flex',

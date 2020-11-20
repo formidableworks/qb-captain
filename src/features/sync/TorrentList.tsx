@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
@@ -6,7 +6,7 @@ import { FixedSizeList } from 'react-window';
 import { selectFilteredTorrents } from './syncSelectors';
 import { TorrentItem } from './TorrentItem';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     TorrentListRoot: {
       flexGrow: 1,
