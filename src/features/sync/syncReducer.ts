@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { MaindataResponse } from '../../api/generated-types/Maindata.response';
-import { toggleDiscreteFilter } from './syncActions';
+import { setQuickFilter, toggleDiscreteFilter } from './syncActions';
 import { maindataThunk } from './syncThunks';
 
 interface SyncState {
@@ -49,6 +49,9 @@ export const syncReducer = createReducer(initialState, (builder) => {
     })
     .addCase(maindataThunk.rejected, (draftState) => {
       draftState.isMaindataPending = false;
+    })
+    .addCase(setQuickFilter, (draftState, action) => {
+      draftState.quickFilter = action.payload;
     })
     .addCase(toggleDiscreteFilter, (draftState, action) => {
       const { tags, categories, states } = draftState.filters;
