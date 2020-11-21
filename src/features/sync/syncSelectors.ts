@@ -14,8 +14,14 @@ export const selectCategoryFilters = (state: RootState): string[] => state.sync.
 export const selectStateFilters = (state: RootState): string[] => state.sync.filters.states;
 
 export const selectFilteredTorrents = createSelector(
-  [selectMaindataTorrents, selectQuickFilter, selectTagFilters],
-  (torrentList, quickFilterValue, tagFilters) => {
+  [
+    selectMaindataTorrents,
+    selectQuickFilter,
+    selectTagFilters,
+    selectCategoryFilters,
+    selectStateFilters,
+  ],
+  (torrentList, quickFilterValue, tagFilters, categoryFilters, stateFilters) => {
     const filteredByQuickFilter =
       quickFilterValue.length === 0
         ? torrentList
@@ -29,6 +35,14 @@ export const selectFilteredTorrents = createSelector(
             const torrentTagArray = torrent.tags.split(', ');
             return torrentTagArray.some((torrentTag) => tagFilters.includes(torrentTag));
           });
-    return filteredByTags;
+    const filteredByCategories =
+      categoryFilters.length === 0
+        ? filteredByTags
+        : filteredByTags.filter((torrent) => categoryFilters.includes(torrent.category));
+    const filteredByTorrentState =
+      stateFilters.length === 0
+        ? filteredByCategories
+        : filteredByCategories.filter((torrent) => stateFilters.includes(torrent.state));
+    return filteredByTorrentState;
   }
 );

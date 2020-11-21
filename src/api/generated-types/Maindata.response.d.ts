@@ -113,5 +113,9 @@ export interface TorrentInfo {
    * Comma-concatenated tag list of the torrent
    */
   tags: string;
+  /**
+   * Category of the torrent
+   */
+  category: string;
   [k: string]: unknown;
 }

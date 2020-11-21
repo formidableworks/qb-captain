@@ -49,6 +49,10 @@
     "tags": {
       "type": "string",
       "description": "Comma-concatenated tag list of the torrent"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category of the torrent"
     }
   },
   "required": [
@@ -62,6 +66,7 @@
     "num_leechs",
     "eta",
     "priority",
-    "tags"
+    "tags",
+    "category"
   ]
 }
