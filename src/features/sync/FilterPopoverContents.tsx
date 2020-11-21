@@ -24,11 +24,13 @@ const useStyles = makeStyles((theme: Theme) =>
     heading: {
       display: 'flex',
       alignItems: 'center',
+      opacity: 0.7,
     },
     headingIcon: {
-      width: '0.75em',
-      height: '0.75em',
-      marginRight: theme.spacing(1),
+      marginRight: theme.spacing(0.5),
+    },
+    formControlLabel: {
+      marginLeft: theme.spacing(-1),
     },
   })
 );
@@ -100,6 +102,7 @@ export const FilterPopoverContents = (): JSX.Element => {
       )}
       {uniqueTags.map((tag) => (
         <FormControlLabel
+          className={classes.formControlLabel}
           control={
             <Checkbox
               checked={tagFilters.includes(tag)}
@@ -119,6 +122,7 @@ export const FilterPopoverContents = (): JSX.Element => {
       )}
       {uniqueCategories.map((category) => (
         <FormControlLabel
+          className={classes.formControlLabel}
           control={
             <Checkbox
               checked={categoryFilters.includes(category)}
@@ -138,6 +142,7 @@ export const FilterPopoverContents = (): JSX.Element => {
       )}
       {uniqueTorrentStates.map((torrentState) => (
         <FormControlLabel
+          className={classes.formControlLabel}
           control={
             <Checkbox
               checked={torrentStateFilters.includes(torrentState)}
