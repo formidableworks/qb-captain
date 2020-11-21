@@ -68,6 +68,7 @@ export interface TransferInfo {
  * Qbittorrent webapi Torrent Info
  */
 export interface TorrentInfo {
+  state: TorrentInfoState;
   /**
    * Torrent hash
    */
@@ -108,6 +109,9 @@ export interface TorrentInfo {
    * Torrent priority. Returns -1 if queuing is disabled or torrent is in seed mode
    */
   priority: number;
-  state: TorrentInfoState;
+  /**
+   * Comma-concatenated tag list of the torrent
+   */
+  tags: string;
   [k: string]: unknown;
 }

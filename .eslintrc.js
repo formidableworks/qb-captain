@@ -76,5 +76,8 @@ module.exports = {
 
     // allow useful console logs.
     'no-console': ['warn', { allow: ['warn', 'error'] }],
+
+    // array.reduce is understandable, powerful, and immutable.
+    'unicorn/no-reduce': 'off',
   },
 };

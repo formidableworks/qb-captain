@@ -5,6 +5,7 @@
   "description": "Qbittorrent webapi Torrent Info",
   "type": "object",
   "properties": {
+    "state": { "$ref": "TorrentInfoState.json" },
     "hash": {
       "type": "string",
       "description": "Torrent hash"
@@ -45,9 +46,13 @@
       "type": "number",
       "description": "Torrent priority. Returns -1 if queuing is disabled or torrent is in seed mode"
     },
-    "state": { "$ref": "TorrentInfoState.json" }
+    "tags": {
+      "type": "string",
+      "description": "Comma-concatenated tag list of the torrent"
+    }
   },
   "required": [
+    "state",
     "name",
     "progress",
     "dlspeed",
@@ -57,6 +62,6 @@
     "num_leechs",
     "eta",
     "priority",
-    "state"
+    "tags"
   ]
 }

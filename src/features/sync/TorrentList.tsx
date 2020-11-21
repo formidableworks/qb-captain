@@ -26,7 +26,7 @@ export const TorrentList = (): JSX.Element => {
             height={height}
             width={width}
             itemCount={torrents.length}
-            itemSize={35}
+            itemSize={100}
           >
             {TorrentItem}
           </FixedSizeList>

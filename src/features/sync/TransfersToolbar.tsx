@@ -1,8 +1,8 @@
 import { Button } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import SortIcon from '@material-ui/icons/Sort';
 import React from 'react';
+import { FilterPopover } from './FilterPopover';
 import { MaindataControl } from './MaindataControl';
 import { QuickFilterTextField } from './QuickFilterTextField';
 
@@ -32,9 +32,7 @@ export const TransfersToolbar = (): JSX.Element => {
     <div className={classes.TransfersToolbarRoot}>
       <QuickFilterTextField />
       <div className={classes.spacer} />
-      <Button className={classes.marginRight} size="small" startIcon={<FilterListIcon />}>
-        Filter
-      </Button>
+      <FilterPopover />
       <Button className={classes.marginRight} size="small" startIcon={<SortIcon />}>
         Sort
       </Button>
