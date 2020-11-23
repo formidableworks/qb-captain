@@ -2,9 +2,8 @@ import { IconButton, InputAdornment, TextField } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import CancelIcon from '@material-ui/icons/Cancel';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setQuickFilter } from './syncActions';
-import { selectQuickFilter } from './syncSelectors';
+import { useHistory } from 'react-router-dom';
+import { addQueryFilters, getQueryFilters } from './torrentListQueryFilters';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,13 +36,15 @@ const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): vo
 
 export const QuickFilterTextField = (): JSX.Element => {
   const classes = useStyles();
-  const quickFilterValue = useSelector(selectQuickFilter);
-  const dispatch = useDispatch();
+  const history = useHistory();
+  const queryFilters = getQueryFilters(history.location);
+  const quickFilterValue = queryFilters.s;
+
   const handleQuickFilterOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setQuickFilter(event.target.value));
+    addQueryFilters({ s: event.target.value }, history);
   };
   const handleClickClearQuickFilter = (): void => {
-    dispatch(setQuickFilter(''));
+    addQueryFilters({ s: '' }, history);
   };
 
   return (

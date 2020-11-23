@@ -13,8 +13,12 @@ export const selectFilteredTorrents = (queryFilters: TorrentListQueryFilters) =>
   state: RootState
 ): TorrentInfo[] => {
   const torrentList = selectMaindataTorrents(state);
-  const quickFilterValue = selectQuickFilter(state);
-  const { categories: categoryFilters, tags: tagFilters, states: stateFilters } = queryFilters;
+  const {
+    categories: categoryFilters,
+    tags: tagFilters,
+    states: stateFilters,
+    s: quickFilterValue,
+  } = queryFilters;
 
   const filteredByQuickFilter =
     quickFilterValue.length === 0
