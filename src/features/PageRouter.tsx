@@ -17,7 +17,7 @@ export const PageRouter = (): JSX.Element => {
     }
     // if user isAuthd and on login page redirect to root/ referrer page (when stored in search params.)
     if (isAuthd && location.pathname === '/login') {
-      history.goBack();
+      history.go(-1);
     }
   }, [isAuthd, location]);
 

@@ -1,5 +1,5 @@
 import Axios, { AxiosResponse } from 'axios';
-import qs from 'qs';
+import queryString from 'query-string';
 
 export interface LoginRequestParams {
   username: string;
@@ -9,7 +9,7 @@ export const loginRequest = (loginParams: LoginRequestParams): Promise<AxiosResp
   Axios.request({
     url: 'api/v2/auth/login',
     method: 'POST',
-    data: qs.stringify({ username: loginParams.username, password: loginParams.password }),
+    data: queryString.stringify({ username: loginParams.username, password: loginParams.password }),
   });
 
 export const logoutRequest = (): Promise<AxiosResponse> =>

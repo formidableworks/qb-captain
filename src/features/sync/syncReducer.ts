@@ -1,25 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { MaindataResponse } from '../../api/generated-types/Maindata.response';
-import { setQuickFilter, toggleDiscreteFilter } from './syncActions';
+import { setQuickFilter } from './syncActions';
 import { maindataThunk } from './syncThunks';
 
 interface SyncState {
-  filters: {
-    tags: string[];
-    categories: string[];
-    states: string[];
-  };
   quickFilter: string;
   isMaindataPending: boolean;
   maindata: MaindataResponse;
 }
 
 const initialState: SyncState = {
-  filters: {
-    tags: [],
-    categories: [],
-    states: [],
-  },
   quickFilter: '',
   isMaindataPending: false,
   maindata: {
@@ -52,28 +42,5 @@ export const syncReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setQuickFilter, (draftState, action) => {
       draftState.quickFilter = action.payload;
-    })
-    .addCase(toggleDiscreteFilter, (draftState, action) => {
-      const { tags, categories, states } = draftState.filters;
-      const { filterType, filterValue } = action.payload;
-      switch (filterType) {
-        case 'tags':
-          draftState.filters.tags = tags.includes(filterValue)
-            ? tags.filter((tag) => tag !== filterValue)
-            : [...tags, filterValue];
-          break;
-        case 'categories':
-          draftState.filters.categories = categories.includes(filterValue)
-            ? categories.filter((cat) => cat !== filterValue)
-            : [...categories, filterValue];
-          break;
-        case 'states':
-          draftState.filters.states = states.includes(filterValue)
-            ? states.filter((state) => state !== filterValue)
-            : [...states, filterValue];
-          break;
-        default:
-          throw new Error(`unexpected filterType value: ${filterType}`);
-      }
     });
 });

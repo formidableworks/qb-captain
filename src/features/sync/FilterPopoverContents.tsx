@@ -3,16 +3,12 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import CategoryIcon from '@material-ui/icons/Category';
 import InfoIcon from '@material-ui/icons/Info';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { ChangeEvent } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { TorrentInfo } from '../../api/generated-types/Maindata.response';
-import { toggleDiscreteFilter } from './syncActions';
-import {
-  selectCategoryFilters,
-  selectMaindataTorrents,
-  selectStateFilters,
-  selectTagFilters,
-} from './syncSelectors';
+import { selectMaindataTorrents } from './syncSelectors';
+import { addQueryFilters, getQueryFilters, removeQueryFilters } from './torrentListQueryFilters';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,25 +68,35 @@ const getUniqueTorrentStates = (torrentList: TorrentInfo[]): string[] =>
 
 export const FilterPopoverContents = (): JSX.Element => {
   const classes = useStyles();
+  const history = useHistory();
+
   const torrentList = useSelector(selectMaindataTorrents);
-  const tagFilters = useSelector(selectTagFilters);
-  const categoryFilters = useSelector(selectCategoryFilters);
-  const torrentStateFilters = useSelector(selectStateFilters);
-
-  const dispatch = useDispatch();
-
   const uniqueTags = getUniqueTags(torrentList);
   const uniqueCategories = getUniqueCategories(torrentList);
   const uniqueTorrentStates = getUniqueTorrentStates(torrentList);
 
-  const handleChangeTag = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(toggleDiscreteFilter({ filterType: 'tags', filterValue: event.target.name }));
+  const queryFilters = getQueryFilters(history.location);
+
+  const handleChangeTag = (event: ChangeEvent<HTMLInputElement>, checked: boolean): void => {
+    if (checked) {
+      addQueryFilters({ tags: [event.target.name] }, history);
+    } else {
+      removeQueryFilters({ tags: [event.target.name] }, history);
+    }
   };
-  const handleChangeCategory = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(toggleDiscreteFilter({ filterType: 'categories', filterValue: event.target.name }));
+  const handleChangeCategory = (event: ChangeEvent<HTMLInputElement>, checked: boolean): void => {
+    if (checked) {
+      addQueryFilters({ categories: [event.target.name] }, history);
+    } else {
+      removeQueryFilters({ categories: [event.target.name] }, history);
+    }
   };
-  const handleChangeTorrentState = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(toggleDiscreteFilter({ filterType: 'states', filterValue: event.target.name }));
+  const handleChangeState = (event: ChangeEvent<HTMLInputElement>, checked: boolean): void => {
+    if (checked) {
+      addQueryFilters({ states: [event.target.name] }, history);
+    } else {
+      removeQueryFilters({ states: [event.target.name] }, history);
+    }
   };
   return (
     <div className={classes.FilterPopoverContentsRoot}>
@@ -105,7 +111,7 @@ export const FilterPopoverContents = (): JSX.Element => {
           className={classes.formControlLabel}
           control={
             <Checkbox
-              checked={tagFilters.includes(tag)}
+              checked={queryFilters.tags.includes(tag)}
               onChange={handleChangeTag}
               name={tag}
               color="primary"
@@ -125,7 +131,7 @@ export const FilterPopoverContents = (): JSX.Element => {
           className={classes.formControlLabel}
           control={
             <Checkbox
-              checked={categoryFilters.includes(category)}
+              checked={queryFilters.categories.includes(category)}
               onChange={handleChangeCategory}
               name={category}
               color="primary"
@@ -145,8 +151,8 @@ export const FilterPopoverContents = (): JSX.Element => {
           className={classes.formControlLabel}
           control={
             <Checkbox
-              checked={torrentStateFilters.includes(torrentState)}
-              onChange={handleChangeTorrentState}
+              checked={queryFilters.states.includes(torrentState)}
+              onChange={handleChangeState}
               name={torrentState}
               color="primary"
             />

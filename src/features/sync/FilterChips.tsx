@@ -5,9 +5,8 @@ import CategoryIcon from '@material-ui/icons/Category';
 import InfoIcon from '@material-ui/icons/Info';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleDiscreteFilter, ToggleFilterAction } from './syncActions';
-import { selectCategoryFilters, selectStateFilters, selectTagFilters } from './syncSelectors';
+import { useHistory } from 'react-router-dom';
+import { getQueryFilters, removeQueryFilters } from './torrentListQueryFilters';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,46 +23,41 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const FilterChips = (): JSX.Element => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const filterTags = useSelector(selectTagFilters);
-  const filterCategories = useSelector(selectCategoryFilters);
-  const filterTorrentStates = useSelector(selectStateFilters);
+  const history = useHistory();
+  const queryFilters = getQueryFilters(history.location);
 
-  const onDeleteChip = (toggleFilter: ToggleFilterAction): void => {
-    dispatch(toggleDiscreteFilter(toggleFilter));
-  };
   return (
     <div className={classes.filterChipsRoot}>
-      {filterTags.map((tag) => (
+      {queryFilters.tags.map((tag) => (
         <Chip
           label={tag}
           variant="outlined"
           size="small"
           className={classes.chip}
           deleteIcon={<CancelIcon />}
-          onDelete={() => onDeleteChip({ filterType: 'tags', filterValue: tag })}
+          onDelete={() => removeQueryFilters({ tags: [tag] }, history)}
           icon={<LocalOfferIcon />}
         />
       ))}
-      {filterCategories.map((category) => (
+      {queryFilters.categories.map((category) => (
         <Chip
           label={category}
           variant="outlined"
           size="small"
           className={classes.chip}
           deleteIcon={<CancelIcon />}
-          onDelete={() => onDeleteChip({ filterType: 'categories', filterValue: category })}
+          onDelete={() => removeQueryFilters({ categories: [category] }, history)}
           icon={<CategoryIcon />}
         />
       ))}
-      {filterTorrentStates.map((torrentState) => (
+      {queryFilters.states.map((torrentState) => (
         <Chip
           label={torrentState}
           variant="outlined"
           size="small"
           className={classes.chip}
           deleteIcon={<CancelIcon />}
-          onDelete={() => onDeleteChip({ filterType: 'states', filterValue: torrentState })}
+          onDelete={() => removeQueryFilters({ states: [torrentState] }, history)}
           icon={<InfoIcon />}
         />
       ))}
