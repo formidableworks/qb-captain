@@ -7,8 +7,6 @@ export const selectIsMaindataPending = (state: RootState): boolean => state.sync
 export const selectMaindataTorrents = (state: RootState): TorrentInfo[] =>
   Object.values(state.sync.maindata.torrents);
 
-export const selectQuickFilter = (state: RootState): string => state.sync.quickFilter;
-
 export const selectFilteredTorrents = (queryFilters: TorrentListQueryFilters) => (
   state: RootState
 ): TorrentInfo[] => {
